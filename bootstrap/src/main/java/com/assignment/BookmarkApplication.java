@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 @ComponentScan
 @SpringBootApplication
-public class Application {
+public class BookmarkApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(BookmarkApplication.class, args);
     }
 }

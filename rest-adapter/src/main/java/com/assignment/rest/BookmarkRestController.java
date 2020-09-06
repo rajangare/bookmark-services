@@ -12,6 +12,6 @@ public class BookmarkRestController {
 
     @GetMapping("/demo")
     public ResponseEntity<String> demo() {
-        return new ResponseEntity<>("<h2>Welcome Bookmark Demo !</h2>", HttpStatus.OK);
+        return new ResponseEntity<>("<h2>Welcome to Bookmark Demo !</h2>", HttpStatus.OK);
     }
 }

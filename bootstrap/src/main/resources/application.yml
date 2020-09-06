@@ -15,7 +15,7 @@ eureka: #tells about the Eureka server details and its refresh time
 
 spring:
   application:
-    name: assignment-app-service   #current service name to be used by the eureka server
+    name: bookmark-services   #current service name to be used by the eureka server
 
 management:
   security:

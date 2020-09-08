@@ -5,7 +5,7 @@ install: true
 script:
   - ./mvnw clean install
   - mvn cobertura:cobertura
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 43721452-78f1-4fef-b8d0-030283e57736
 
 
 cache:

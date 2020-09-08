@@ -18,9 +18,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.assignment.BookmarkApplication</mainClass>
-                </configuration>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>com.assignment.BookmarkApplication</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

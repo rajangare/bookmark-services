@@ -19,22 +19,3 @@ eureka:
 management:
   security:
     enabled: false
-
-# custom path for swagger-ui
-springdoc:
-  pathsToMatch: /api/**
-  version: @springdoc.version@
-  swagger-ui:
-    path: /swagger-ui.html
-    operationsSorter: method
-  api-docs:
-    path: /v3/api-docs
-
-
-
-# H2 Related Configurations
-#  datasource:
-#    url: jdbc:h2:mem:springdoc
-#    jpa:
- #     hibernate:
-  #      ddl-auto: none

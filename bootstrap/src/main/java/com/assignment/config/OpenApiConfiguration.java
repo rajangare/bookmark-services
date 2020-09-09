@@ -14,7 +14,9 @@ public class OpenApiConfiguration {
     public OpenAPI customOpenAPI(@Value("3.0") String appVersion) {
         return new OpenAPI().info(new Info().title("BOOKMARK API")
                 .version(appVersion)
-                .description("Bookmark API documentation on OPEN API 3.0")
+                .description("Bookmark API documentation on OPEN API 3.0" +
+                        "<br />" +
+                        "<a href='http://localhost:8090/h2-console/login.jsp'>H2 Database URL</a>")
                 .termsOfService("http://swagger.io/terms/")
                 .license(new License().name("Apache 2.0").url("http://springdoc.org")));
     }

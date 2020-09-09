@@ -21,7 +21,7 @@
                 <executions>
                     <execution>
                         <configuration>
-                            <mainClass>com.assignment.BookmarkApplication</mainClass>
+                            <mainClass>com.assignment.Application</mainClass>
                         </configuration>
                     </execution>
                 </executions>

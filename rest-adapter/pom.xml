@@ -18,6 +18,10 @@
             <groupId>com.assignment</groupId>
             <artifactId>domain-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.assignment</groupId>
+            <artifactId>jpa-adapter</artifactId>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>

@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,13 +22,15 @@ public class BookmarkCardDto implements Serializable {
 
     private String fevicon;
 
+    private LocalDate expiryDate;
+
     private String createdBy;
 
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
 
     private String modifiedBy;
 
-    private LocalDate modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @Override
     public String toString() {

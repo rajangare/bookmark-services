@@ -14,16 +14,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = BookmarkCardController.class)
 @AutoConfigureMockMvc
@@ -43,7 +38,7 @@ class BookmarkCardControllerTest {
     @DisplayName("Should find all the cards - success")
     public void findAllCards_test() throws Exception {
         Mockito.when(bookmarkCardPort.findAllBookmarkCards()).thenReturn(getBookmarkCardList());
-        mockMvc.perform(get("/api/v1/bookmark/cards").contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get("/api/v1/bookmark-management/cards").contentType(MediaType.APPLICATION_JSON_VALUE))
         .andExpect(status().isOk());
     }
 
@@ -51,7 +46,7 @@ class BookmarkCardControllerTest {
     @DisplayName("Should find one card by Id- success")
     public void findCardById_test() throws Exception {
         Mockito.when(bookmarkCardPort.findAllBookmarkCards()).thenReturn(getBookmarkCardList());
-        mockMvc.perform(get("/api/v1/bookmark/cards/1").contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get("/api/v1/bookmark-management/cards/1").contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 

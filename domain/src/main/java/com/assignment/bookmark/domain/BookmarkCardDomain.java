@@ -28,8 +28,8 @@ public class BookmarkCardDomain implements BookmarkCardPort {
     }
 
     @Override
-    public BookmarkCardDto findBookmarkCardById(Long bookmarkId) {
-        Optional<BookmarkCardEntity> cardDetailsEntity = bookmarkCardRepository.findById(bookmarkId);
+    public BookmarkCardDto findBookmarkCardById(Long cardId) {
+        Optional<BookmarkCardEntity> cardDetailsEntity = bookmarkCardRepository.findById(cardId);
 
         return cardDetailsEntity.map(mapper::mapCardDetailDto).orElse(null);
     }
@@ -50,7 +50,7 @@ public class BookmarkCardDomain implements BookmarkCardPort {
     }
 
     @Override
-    public void deleteBookmarkCard(Long bookmarkId) {
-        bookmarkCardRepository.deleteById(bookmarkId);
+    public void deleteBookmarkCard(Long cardId) {
+        bookmarkCardRepository.deleteById(cardId);
     }
 }

@@ -12,9 +12,9 @@ import io.swagger.v3.oas.models.info.License;
 public class OpenApiConfiguration {
     @Bean
     public OpenAPI customOpenAPI(@Value("3.0") String appVersion) {
-        return new OpenAPI().info(new Info().title("BOOKMARK API")
+        return new OpenAPI().info(new Info().title("Bookmark Management API Documentation")
                 .version(appVersion)
-                .description("Bookmark API documentation on OPEN API 3.0" +
+                .description("Bookmark  management API documentation on OPEN API 3.0" +
                         "<br />" +
                         "<a href='http://localhost:8090/h2-console/login.jsp' target=blank>H2 Database URL</a>")
                 .termsOfService("http://swagger.io/terms/")

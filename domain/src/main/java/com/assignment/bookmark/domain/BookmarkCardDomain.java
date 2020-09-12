@@ -30,25 +30,23 @@ public class BookmarkCardDomain implements BookmarkCardPort {
     @Override
     public BookmarkCardDto findBookmarkCardById(Long bookmarkId) {
         Optional<BookmarkCardEntity> cardDetailsEntity = bookmarkCardRepository.findById(bookmarkId);
-        BookmarkCardDto bookmarkCardDto = cardDetailsEntity.map(mapper::mapCardDetailDto).orElse(null);
 
-        return bookmarkCardDto;
+        return cardDetailsEntity.map(mapper::mapCardDetailDto).orElse(null);
     }
 
     @Override
     public List<BookmarkCardDto> findAllBookmarkCards() {
         Iterable<BookmarkCardEntity> cardDetailsEntities = bookmarkCardRepository.findAll();
-        List<BookmarkCardDto> bookmarkCardDtoList = mapper.mapCardDetailsDtoList(StreamSupport.
+
+        return mapper.mapCardDetailsDtoList(StreamSupport.
                 stream(cardDetailsEntities.spliterator(), true).collect(Collectors.toList()));
-        return bookmarkCardDtoList;
     }
 
     @Override
     public BookmarkCardDto saveOrUpdateBookmarkCard(BookmarkCardDto bookmarkCardDto) {
         LOGGER.info("Create bookmark card : ", bookmarkCardDto);
-        BookmarkCardEntity bookmarkCardEntity = mapper.mapOneCardDetail(bookmarkCardDto);
 
-        return mapper.mapCardDetailDto(bookmarkCardRepository.save(bookmarkCardEntity));
+        return mapper.mapCardDetailDto(bookmarkCardRepository.save(mapper.mapOneCardDetail(bookmarkCardDto)));
     }
 
     @Override

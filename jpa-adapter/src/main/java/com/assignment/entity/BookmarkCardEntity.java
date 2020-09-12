@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Table(name = "T_CARD_DETAIL")
 public class BookmarkCardEntity implements Serializable {
     @Id
-    @SequenceGenerator(name = "seqCardDetails", sequenceName = "SEQ_CARD_DETAIL", initialValue = 1, allocationSize = 1)
+    @SequenceGenerator(name = "seqCardDetails", sequenceName = "SEQ_CARD_DETAIL", initialValue = 1, allocationSize = 100)
     @GeneratedValue(generator = "seqCardDetails")
     @Column(name = "ID")
     private Long id;

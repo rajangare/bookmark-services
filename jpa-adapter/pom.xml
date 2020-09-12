@@ -13,22 +13,11 @@
     <name>JPA Adapter</name>
     <url>http://maven.apache.org</url>
     <dependencies>
-        <dependency>
-            <groupId>com.assignment</groupId>
-            <artifactId>domain-api</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-      </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>

@@ -83,7 +83,7 @@ public class BookmarkCardController {
         return new ResponseEntity<>(bookmarkCardPort.saveOrUpdateBookmarkCard(bookmarkCardDto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/card/edit")
+    @PutMapping(value = "/card/edit", headers = "Accept=application/json")
     @Operation(summary = "Modify bookmark card")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardDto.class))}),

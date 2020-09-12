@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -42,17 +43,20 @@ class BookmarkCardControllerTest {
     @DisplayName("Should find all the cards - success")
     public void findAllCards_test() throws Exception {
         Mockito.when(bookmarkCardPort.findAllBookmarkCards()).thenReturn(getBookmarkCardList());
+        mockMvc.perform(get("/api/v1/bookmark/cards").contentType(MediaType.APPLICATION_JSON_VALUE))
+        .andExpect(status().isOk());
+    }
 
-        mockMvc.perform(get("/api/v1/bookmark/cards"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("index"))
-                .andDo(MockMvcResultHandlers.print())
-                .andReturn();
+    @Test
+    @DisplayName("Should find one card by Id- success")
+    public void findCardById_test() throws Exception {
+        Mockito.when(bookmarkCardPort.findAllBookmarkCards()).thenReturn(getBookmarkCardList());
+        mockMvc.perform(get("/api/v1/bookmark/cards/1").contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
     }
 
     private List<BookmarkCardDto> getBookmarkCardList() {
         List<BookmarkCardDto> bookmarkCardDtoList = new ArrayList<>();
-
         BookmarkCardDto bookmarkCardDto1 = new BookmarkCardDto();
         bookmarkCardDto1.setId(new Long(1));
         bookmarkCardDto1.setTitle("Title1");

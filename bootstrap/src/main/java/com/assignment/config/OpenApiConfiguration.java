@@ -16,7 +16,7 @@ public class OpenApiConfiguration {
                 .version(appVersion)
                 .description("Bookmark API documentation on OPEN API 3.0" +
                         "<br />" +
-                        "<a href='http://localhost:8090/h2-console/login.jsp'>H2 Database URL</a>")
+                        "<a href='http://localhost:8090/h2-console/login.jsp' target=blank>H2 Database URL</a>")
                 .termsOfService("http://swagger.io/terms/")
                 .license(new License().name("Apache 2.0").url("http://springdoc.org")));
     }

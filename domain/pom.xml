@@ -18,6 +18,10 @@
             <artifactId>domain-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.assignment</groupId>
+            <artifactId>jpa-adapter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

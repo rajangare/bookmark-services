@@ -32,3 +32,11 @@ CREATE TABLE T_BOOKMARK_CARD_GROUP (
 );
 
 CREATE SEQUENCE IF NOT EXISTS SEQ_T_BOOKMARK_CARD_GROUP INCREMENT 1 START 1;
+
+INSERT INTO T_BOOKMARK_CARD
+VALUES(1, 'Card Title', 'Card description 1111', 'https://www.google.com', 'https://www.google.co.in','NA','2020-09-20', 'Rajkumar', '2020-09-11', 'Akash', '2020-09-11');
+INSERT INTO T_BOOKMARK_CARD
+VALUES(2, 'Card Title22', 'Card description 22222', 'https://www.facebook.com', 'https://www.facebook.co.in','NA','2020-09-25', 'Rajkumar ANGARE', '2020-09-10', 'Akash', '2020-09-12');
+
+INSERT INTO T_BOOKMARK_CARD_GROUP
+VALUES(1, 'Group one Name', 'Group description', 'https://mygroup.com','GBSU/FRM/CCR','null','Rajkumar ANGARE', '2020-09-10', 'Akash', '2020-09-12');

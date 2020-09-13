@@ -6,10 +6,11 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
-public class BookmarkCardGroupDto implements Serializable {
+public class BookmarkGroupDto implements Serializable {
     private Long id;
 
     private String groupName;
@@ -18,9 +19,7 @@ public class BookmarkCardGroupDto implements Serializable {
 
     private String groupUrl;
 
-    private String actualUrl;
-
-    private String cards;
+    private List<UserDto> groupAdmin;
 
     private String createdBy;
 

@@ -18,11 +18,15 @@ public class BookmarkCardDto implements Serializable {
 
     private String shortUrl;
 
-    private String actualUrl;
+    private String longUrl;
 
     private String fevicon;
 
     private LocalDate expiryDate;
+
+    private boolean approved;
+
+    BookmarkGroupDto bookmarkGroup;
 
     private String createdBy;
 
@@ -31,20 +35,4 @@ public class BookmarkCardDto implements Serializable {
     private String modifiedBy;
 
     private LocalDateTime modifiedDate;
-
-    @Override
-    public String toString() {
-        return "BookmarkCardDto{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", shortUrl='" + shortUrl + '\'' +
-                ", actualUrl='" + actualUrl + '\'' +
-                ", fevicon='" + fevicon + '\'' +
-                ", createdBy='" + createdBy + '\'' +
-                ", creationDate=" + creationDate +
-                ", modifiedBy='" + modifiedBy + '\'' +
-                ", modifiedDate=" + modifiedDate +
-                '}';
-    }
 }

@@ -1,7 +1,10 @@
 package com.assignment.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,10 +14,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity(name = "BookmarkCardEntity")
-@Table(name = "T_BOOKMARK_CARD")
+@Table(name = "T_CARD_BMK")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class BookmarkCardEntity implements Serializable {
     @Id
-    @SequenceGenerator(name = "seqBookmarkCardDetails", sequenceName = "SEQ_T_BOOKMARK_CARD", initialValue = 1, allocationSize = 100)
+    @SequenceGenerator(name = "seqBookmarkCardDetails", sequenceName = "SEQ_CARD_BMK", initialValue = 1, allocationSize = 100)
     @GeneratedValue(generator = "seqBookmarkCardDetails")
     @Column(name = "ID")
     private Long id;
@@ -28,14 +32,21 @@ public class BookmarkCardEntity implements Serializable {
     @Column(name = "SHORT_URL")
     private String shortUrl;
 
-    @Column(name = "ACTUAL_URL")
-    private String actualUrl;
+    @Column(name = "LONG_URL")
+    private String longUrl;
 
     @Column(name = "FEVICON")
     private String fevicon;
 
     @Column(name = "EXPIRY_DATE")
     private LocalDate expiryDate;
+
+    @Column(name = "APPROVED")
+    private boolean approved;
+
+    @Type(type = "jsonb")
+    @Column(name = "GROUP_DETAIL", columnDefinition = "jsonb")
+    private String groupDetails;
 
     @Column(name = "CREATED_BY")
     private String createdBy;

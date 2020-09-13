@@ -1,21 +1,24 @@
 package com.assignment.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity(name = "BookmarkCardGroupEntity")
-@Table(name = "T_BOOKMARK_CARD_GROUP")
-public class BookmarkCardGroupEntity implements Serializable {
+@Entity(name = "BookmarkGroupEntity")
+@Table(name = "T_GROUP_BMK")
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+public class BookmarkGroupEntity implements Serializable {
     @Id
-    @SequenceGenerator(name = "seqBookmarkCardDetails", sequenceName = "SEQ_T_BOOKMARK_CARD_GROUP", initialValue = 1, allocationSize = 100)
-    @GeneratedValue(generator = "seqBookmarkCardDetails")
+    @SequenceGenerator(name = "seqGroupDetails", sequenceName = "SEQ_GROUP_BMK", allocationSize = 100)
+    @GeneratedValue(generator = "seqGroupDetails")
     @Column(name = "ID")
     private Long id;
 
@@ -28,11 +31,9 @@ public class BookmarkCardGroupEntity implements Serializable {
     @Column(name = "GROUP_URL")
     private String groupUrl;
 
-    @Column(name = "TEAM")
-    private String actualUrl;
-
-    @Column(name = "CARDS")
-    private String cards;
+    @Type(type = "jsonb")
+    @Column(name = "GROUP_ADMIN", columnDefinition = "jsonb")
+    private String groupAdmin;
 
     @Column(name = "CREATED_BY")
     private String createdBy;

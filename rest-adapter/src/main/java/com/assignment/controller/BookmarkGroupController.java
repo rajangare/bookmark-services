@@ -1,8 +1,8 @@
 package com.assignment.controller;
 
 
-import com.assignment.model.BookmarkCardGroupDto;
-import com.assignment.port.BookmarkCardGroupPort;
+import com.assignment.model.BookmarkGroupDto;
+import com.assignment.port.BookmarkGroupPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -19,86 +19,86 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/bookmark-management")
-public class BookmarkCardGroupController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookmarkCardGroupController.class);
+public class BookmarkGroupController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookmarkGroupController.class);
 
-    private final BookmarkCardGroupPort bookmarkCardGroupPort;
+    private final BookmarkGroupPort bookmarkGroupPort;
 
-    public BookmarkCardGroupController(BookmarkCardGroupPort bookmarkCardGroupPort) {
-        this.bookmarkCardGroupPort = bookmarkCardGroupPort;
+    public BookmarkGroupController(BookmarkGroupPort bookmarkGroupPort) {
+        this.bookmarkGroupPort = bookmarkGroupPort;
     }
 
     @GetMapping("/groups")
     @Operation(summary = "Get all bookmark card groups")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
-            @ApiResponse(responseCode = "201", description = "Card Group created", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
+            @ApiResponse(responseCode = "201", description = "Card Group created", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
             @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
             @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
-    public ResponseEntity<List<BookmarkCardGroupDto>> findAllBookmarkCardGroups() {
+    public ResponseEntity<List<BookmarkGroupDto>> findAllBookmarkCardGroups() {
         LOGGER.info("Get all bookmark card groups.");
 
-        return new ResponseEntity<>(bookmarkCardGroupPort.findAllCardGroups(), HttpStatus.OK);
+        return new ResponseEntity<>(bookmarkGroupPort.findAllCardGroups(), HttpStatus.OK);
     }
 
     @GetMapping("/groups/{cardGroupId}")
     @Operation(summary = "Get a bookmark card group by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
-            @ApiResponse(responseCode = "201", description = "Bookmark group created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
+            @ApiResponse(responseCode = "201", description = "Bookmark group created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
             @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
             @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
-    public ResponseEntity<BookmarkCardGroupDto> findBookmarkCardGroupById(@PathVariable(value = "cardGroupId", required = true) Long cardGroupId) {
+    public ResponseEntity<BookmarkGroupDto> findBookmarkCardGroupById(@PathVariable(value = "cardGroupId", required = true) Long cardGroupId) {
         LOGGER.info("Get bookmark card group by Id.");
 
         if (cardGroupId == null || cardGroupId ==0) {
             LOGGER.info("Invalid bookmark card group Id.");
 
-            return new ResponseEntity<>(new BookmarkCardGroupDto(), HttpStatus.OK);
+            return new ResponseEntity<>(new BookmarkGroupDto(), HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(bookmarkCardGroupPort.findCardGroupById(cardGroupId), HttpStatus.OK);
+        return new ResponseEntity<>(bookmarkGroupPort.findCardGroupById(cardGroupId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/groups", headers = "Accept=application/json")
     @Operation(summary = "Add new bookmark card group")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
-            @ApiResponse(responseCode = "201", description = "Bookmark group created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
+            @ApiResponse(responseCode = "201", description = "Bookmark group created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
             @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
             @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
-    public ResponseEntity<BookmarkCardGroupDto> createBookmarkCardGroup(@Valid @RequestBody(required = true) BookmarkCardGroupDto bookmarkCardGroupDto) {
+    public ResponseEntity<BookmarkGroupDto> createBookmarkCardGroup(@Valid @RequestBody(required = true) BookmarkGroupDto bookmarkGroupDto) {
         LOGGER.info("Create bookmark card  group.");
 
-        if(bookmarkCardGroupDto == null) {
+        if(bookmarkGroupDto == null) {
             LOGGER.info("Invalid input cannot be saved.");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(bookmarkCardGroupPort.saveOrUpdateCardGroup(bookmarkCardGroupDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(bookmarkGroupPort.saveOrUpdateCardGroup(bookmarkGroupDto), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/groups/{cardGroupId}", headers = "Accept=application/json")
     @Operation(summary = "Modify bookmark card group.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
-            @ApiResponse(responseCode = "201", description = "Bookmark group updated ", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardGroupDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
+            @ApiResponse(responseCode = "201", description = "Bookmark group updated ", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
             @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
             @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
-    public ResponseEntity<BookmarkCardGroupDto> updateBookmarkCardGroup(@Valid @RequestBody(required = true) BookmarkCardGroupDto bookmarkCardGroupDto, @PathVariable(value = "cardGroupId", required = true) Long cardGroupId) {
+    public ResponseEntity<BookmarkGroupDto> updateBookmarkCardGroup(@Valid @RequestBody(required = true) BookmarkGroupDto bookmarkGroupDto, @PathVariable(value = "cardGroupId", required = true) Long cardGroupId) {
         LOGGER.info("Modify bookmark card.");
 
-        if(bookmarkCardGroupDto == null || 0 == cardGroupId) {
+        if(bookmarkGroupDto == null || 0 == cardGroupId) {
             LOGGER.info("Invalid input cannot be updated.");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
-        bookmarkCardGroupDto.setId(cardGroupId);
-        return new ResponseEntity<>(bookmarkCardGroupPort.saveOrUpdateCardGroup(bookmarkCardGroupDto), HttpStatus.CREATED);
+        bookmarkGroupDto.setId(cardGroupId);
+        return new ResponseEntity<>(bookmarkGroupPort.saveOrUpdateCardGroup(bookmarkGroupDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/groups/{cardGroupId}")
@@ -118,7 +118,7 @@ public class BookmarkCardGroupController {
             return new ResponseEntity<>(-1, HttpStatus.BAD_REQUEST);
         }
 
-        bookmarkCardGroupPort.deleteCardGroup(cardGroupId);
+        bookmarkGroupPort.deleteCardGroup(cardGroupId);
 
         return new ResponseEntity<>(0, HttpStatus.OK);
     }

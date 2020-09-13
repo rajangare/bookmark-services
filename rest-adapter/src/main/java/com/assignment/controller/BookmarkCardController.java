@@ -1,6 +1,7 @@
 package com.assignment.controller;
 
 import com.assignment.model.BookmarkCardDto;
+import com.assignment.model.BookmarkCardResponse;
 import com.assignment.port.BookmarkCardPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,35 +35,46 @@ public class BookmarkCardController {
     @GetMapping("/cards")
     @Operation(summary = "Get all bookmark cards")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardDto.class))}),
-            @ApiResponse(responseCode = "201", description = "Bookmark created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardResponse.class))}),
+            @ApiResponse(responseCode = "201", description = "Bookmark created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardResponse.class))}),
             @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
             @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
-    public ResponseEntity<List<BookmarkCardDto>> findAllBookmarkCards() {
+    public ResponseEntity<BookmarkCardResponse> findAllBookmarkCards() {
         LOGGER.info("Get all bookmark cards.");
 
-        return new ResponseEntity<>(bookmarkCardPort.findAllBookmarkCards(), HttpStatus.OK);
+        BookmarkCardResponse response = new BookmarkCardResponse();
+        List<BookmarkCardDto> bookmarkCardDtos = bookmarkCardPort.findAllBookmarkCards();
+        response.setBookmarkCards(bookmarkCardDtos);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/cards/{cardId}")
     @Operation(summary = "Get a bookmark card by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardDto.class))}),
-            @ApiResponse(responseCode = "201", description = "Bookmark created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardDto.class))}),
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardResponse.class))}),
+            @ApiResponse(responseCode = "201", description = "Bookmark created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkCardResponse.class))}),
             @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
             @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
-    public ResponseEntity<BookmarkCardDto> findBookmarkCardById(@PathVariable(value = "cardId", required = true) Long cardId) {
+    public ResponseEntity<BookmarkCardResponse> findBookmarkCardById(@PathVariable(value = "cardId", required = true) Long cardId) {
         LOGGER.info("Get bookmark card by Id.");
 
         if (cardId == null || cardId ==0) {
             LOGGER.info("Invalid bookmark card Id.");
 
-            return new ResponseEntity<>(new BookmarkCardDto(), HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(bookmarkCardPort.findBookmarkCardById(cardId), HttpStatus.OK);
+        BookmarkCardResponse response = new BookmarkCardResponse();
+        List<BookmarkCardDto> bookmarkCardDtoList = new ArrayList<>();
+        BookmarkCardDto bookmarkCardDto = bookmarkCardPort.findBookmarkCardById(cardId);
+        bookmarkCardDtoList.add(bookmarkCardDto);
+
+        response.setBookmarkCards(bookmarkCardDtoList);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping(value = "/cards", headers = "Accept=application/json")

@@ -1,6 +1,6 @@
 package com.assignment.controller;
 
-import com.assignment.port.BookmarkCardGroupPort;
+import com.assignment.port.BookmarkGroupPort;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,16 +11,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(value = BookmarkCardGroupController.class)
+@WebMvcTest(value = BookmarkGroupController.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-class BookmarkCardGroupControllerTest {
+class BookmarkGroupControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private BookmarkCardGroupPort bookmarkCardGroupPort;
+    private BookmarkGroupPort bookmarkGroupPort;
 
     @Before
     public void setup() {

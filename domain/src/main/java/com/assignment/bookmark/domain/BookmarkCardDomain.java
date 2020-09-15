@@ -1,5 +1,6 @@
 package com.assignment.bookmark.domain;
 
+import com.assignment.bookmark.helper.UrlShorterHelper;
 import com.assignment.bookmark.mapper.BookmarkCardMapper;
 import com.assignment.entity.BookmarkCardEntity;
 import com.assignment.model.BookmarkCardDto;
@@ -9,10 +10,8 @@ import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -25,10 +24,13 @@ public class BookmarkCardDomain implements BookmarkCardPort {
 
     private final BookmarkCardRepository bookmarkCardRepository;
 
+    private final UrlShorterHelper urlShorterHelper;
+
     private final BookmarkCardMapper mapper = Mappers.getMapper(BookmarkCardMapper.class);
 
-    public BookmarkCardDomain(BookmarkCardRepository bookmarkCardRepository) {
+    public BookmarkCardDomain(BookmarkCardRepository bookmarkCardRepository, UrlShorterHelper urlShorterHelper) {
         this.bookmarkCardRepository = bookmarkCardRepository;
+        this.urlShorterHelper = urlShorterHelper;
     }
 
     @Override

@@ -70,6 +70,10 @@ public class BookmarkCardController {
         BookmarkCardResponse response = new BookmarkCardResponse();
         List<BookmarkCardDto> bookmarkCardDtoList = new ArrayList<>();
         BookmarkCardDto bookmarkCardDto = bookmarkCardPort.findBookmarkCardById(cardId);
+
+        if(bookmarkCardDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         bookmarkCardDtoList.add(bookmarkCardDto);
 
         response.setBookmarkCards(bookmarkCardDtoList);
@@ -90,7 +94,7 @@ public class BookmarkCardController {
 
         if(bookmarkCardDto == null) {
             LOGGER.info("Invalid input cannot be saved.");
-            return new ResponseEntity<>(bookmarkCardDto, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(bookmarkCardPort.saveOrUpdateBookmarkCard(bookmarkCardDto), HttpStatus.CREATED);

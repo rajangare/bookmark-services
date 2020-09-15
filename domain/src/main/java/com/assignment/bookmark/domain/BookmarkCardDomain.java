@@ -9,7 +9,11 @@ import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +42,10 @@ public class BookmarkCardDomain implements BookmarkCardPort {
     public List<BookmarkCardDto> findAllBookmarkCards() {
         Iterable<BookmarkCardEntity> cardDetailsEntities = bookmarkCardRepository.findAll();
 
+        if(cardDetailsEntities == null) {
+            return Collections.EMPTY_LIST;
+        }
+
         return mapper.mapCardDetailsDtoList(StreamSupport.
                 stream(cardDetailsEntities.spliterator(), true).collect(Collectors.toList()));
     }
@@ -46,7 +54,25 @@ public class BookmarkCardDomain implements BookmarkCardPort {
     public BookmarkCardDto saveOrUpdateBookmarkCard(BookmarkCardDto bookmarkCardDto) {
         LOGGER.info("Create bookmark card : ", bookmarkCardDto);
 
-        return mapper.mapCardDetailDto(bookmarkCardRepository.save(mapper.mapOneCardDetail(bookmarkCardDto)));
+        BookmarkCardEntity entity = mapper.mapOneCardDetail(bookmarkCardDto);
+        mapper.mapToEntityExtraInformation(bookmarkCardDto, entity);
+
+        if(entity.getId() == 0 | entity.getId() == null) {
+            entity.setCreationDate(LocalDateTime.now());
+        } else {
+            entity.setModifiedDate(LocalDateTime.now());
+        }
+
+        if(entity.getGroupDetail() == null) {
+            entity.setExpiryDate(null);
+        }
+
+        entity = bookmarkCardRepository.save(entity);
+
+        bookmarkCardDto = mapper.mapCardDetailDto(entity);
+        mapper.mapToDtoExtraInformation(entity, bookmarkCardDto);
+
+        return bookmarkCardDto;
     }
 
     @Override

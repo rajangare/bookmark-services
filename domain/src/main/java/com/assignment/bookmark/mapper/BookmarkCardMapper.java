@@ -26,12 +26,12 @@ public abstract class BookmarkCardMapper {
     public abstract BookmarkCardDto mapCardDetailDto(BookmarkCardEntity bookmarkCardEntity);
 
     @AfterMapping
-    public void mapEntityExtraInformation(BookmarkCardEntity entity, @MappingTarget BookmarkCardDto dto) {
-        entity.setGroupDetails(new Gson().toJson(dto.getBookmarkGroup()));
+    public void mapToDtoExtraInformation(BookmarkCardEntity source, @MappingTarget BookmarkCardDto target) {
+        target.setBookmarkGroup(new Gson().fromJson(source.getGroupDetail(), BookmarkGroupDto.class));
     }
 
     @AfterMapping
-    public void mapDtoExtraInformation(BookmarkCardDto dto, @MappingTarget BookmarkCardEntity entity) {
-        dto.setBookmarkGroup(new Gson().fromJson(entity.getGroupDetails(), BookmarkGroupDto.class));
+    public void mapToEntityExtraInformation(BookmarkCardDto source, @MappingTarget BookmarkCardEntity target) {
+        target.setGroupDetail(new Gson().toJson(source.getBookmarkGroup()));
     }
 }

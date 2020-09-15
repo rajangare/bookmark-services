@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Table(name = "T_USER_BMK")
 public class UserEntity {
     @Id
-    @SequenceGenerator(name = "seqBookmarkUser", sequenceName = "SEQ_USER_BMK", allocationSize = 100)
-    @GeneratedValue(generator = "seqBookmarkUser")
+    @SequenceGenerator(name = "seqBookmarkUser", sequenceName = "SEQ_USER_BMK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqBookmarkUser")
     @Column(name = "ID")
     private Long id;
 

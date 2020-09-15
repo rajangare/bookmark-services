@@ -1,6 +1,7 @@
 package com.assignment.bookmark.domain;
 
 import com.assignment.bookmark.mapper.BookmarkGroupMapper;
+import com.assignment.entity.BookmarkCardEntity;
 import com.assignment.entity.BookmarkGroupEntity;
 import com.assignment.model.BookmarkGroupDto;
 import com.assignment.port.BookmarkGroupPort;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,10 +49,23 @@ public class BookmarkGroupDomain implements BookmarkGroupPort {
 
     @Override
     public BookmarkGroupDto saveOrUpdateCardGroup(BookmarkGroupDto bookmarkGroupDto) {
-        LOGGER.info("Create bookmark Group Card : ", bookmarkGroupDto);
+        LOGGER.info("Create bookmark group : ", bookmarkGroupDto);
 
-        return mapper.mapGroupDetailDto(bookmarkGroupRepository.save(mapper.mapOneGroupDetail(bookmarkGroupDto)));
+        BookmarkGroupEntity entity = mapper.mapOneGroupDetail(bookmarkGroupDto);
+        mapper.mapToEntityExtraInformation(bookmarkGroupDto, entity);
 
+        if(entity.getId() == 0 | entity.getId() == null) {
+            entity.setCreationDate(LocalDateTime.now());
+        } else {
+            entity.setModifiedDate(LocalDateTime.now());
+        }
+
+        entity = bookmarkGroupRepository.save(entity);
+
+        bookmarkGroupDto = mapper.mapGroupDetailDto(entity);
+        mapper.mapToDtoExtraInformation(entity, bookmarkGroupDto);
+
+        return bookmarkGroupDto;
     }
 
     @Override

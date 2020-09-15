@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class BookmarkGroupEntity implements Serializable {
     @Id
-    @SequenceGenerator(name = "seqGroupDetails", sequenceName = "SEQ_GROUP_BMK", allocationSize = 100)
-    @GeneratedValue(generator = "seqGroupDetails")
+    @SequenceGenerator(name = "seqGroupDetails", sequenceName = "SEQ_GROUP_BMK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGroupDetails")
     @Column(name = "ID")
     private Long id;
 
@@ -33,7 +33,7 @@ public class BookmarkGroupEntity implements Serializable {
 
     @Type(type = "jsonb")
     @Column(name = "GROUP_ADMIN", columnDefinition = "jsonb")
-    private String groupAdmin;
+    private String groupAdminDetails;
 
     @Column(name = "CREATED_BY")
     private String createdBy;

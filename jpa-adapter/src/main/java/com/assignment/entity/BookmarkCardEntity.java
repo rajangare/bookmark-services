@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class BookmarkCardEntity implements Serializable {
     @Id
-    @SequenceGenerator(name = "seqBookmarkCardDetails", sequenceName = "SEQ_CARD_BMK", initialValue = 1, allocationSize = 100)
-    @GeneratedValue(generator = "seqBookmarkCardDetails")
+    @SequenceGenerator(name = "seqBookmarkCard", sequenceName = "SEQ_CARD_BMK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqBookmarkCard")
     @Column(name = "ID")
     private Long id;
 
@@ -46,7 +46,7 @@ public class BookmarkCardEntity implements Serializable {
 
     @Type(type = "jsonb")
     @Column(name = "GROUP_DETAIL", columnDefinition = "jsonb")
-    private String groupDetails;
+    private String groupDetail;
 
     @Column(name = "CREATED_BY")
     private String createdBy;

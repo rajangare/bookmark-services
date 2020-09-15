@@ -7,7 +7,7 @@ import java.util.Random;
 
 @Component
 public class UrlShorterHelper {
-    private static String DEFAULT_DOMAIN = "http://sgt.in";
+    private static final String DEFAULT_DOMAIN = "http://sgt.in";
     private HashMap<String, String> keyMap;
     private HashMap<String, String> valueMap;
 
@@ -15,13 +15,13 @@ public class UrlShorterHelper {
 
     private char charArray[];
 
-    private Random random;
+    private final Random random;
     private int keyLength;
 
 
     UrlShorterHelper() {
-        keyMap = new HashMap<String, String>();
-        valueMap = new HashMap<String, String>();
+        keyMap = new HashMap<>();
+        valueMap = new HashMap<>();
         random = new Random();
         keyLength = 8;
         charArray = new char[62];

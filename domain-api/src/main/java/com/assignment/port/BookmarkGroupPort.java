@@ -12,4 +12,6 @@ public interface BookmarkGroupPort {
     BookmarkGroupDto saveOrUpdateCardGroup(BookmarkGroupDto bookmarkCardDto);
 
     void deleteCardGroup(Long cardGroupId);
+
+    List<BookmarkGroupDto> findCardGroupByName(String groupName);
 }

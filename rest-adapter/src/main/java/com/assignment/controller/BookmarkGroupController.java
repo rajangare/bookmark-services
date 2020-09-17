@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,26 @@ public class BookmarkGroupController {
         }
 
         return new ResponseEntity<>(bookmarkGroupPort.findCardGroupById(cardGroupId), HttpStatus.OK);
+    }
+
+    @GetMapping("/groups/groupName/{groupName}")
+    @Operation(summary = "Get a bookmark card group by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
+            @ApiResponse(responseCode = "201", description = "Bookmark group created !", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = BookmarkGroupDto.class))}),
+            @ApiResponse(responseCode = "401", description = "You are not authorized to view the resource"),
+            @ApiResponse(responseCode = "403", description = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found")})
+    public ResponseEntity<List<BookmarkGroupDto>> findBookmarkCardGroupById(@PathVariable(value = "groupName", required = true) String groupName) {
+        LOGGER.info("Get bookmark card group by Id.");
+
+        if (StringUtils.isBlank(groupName)) {
+            LOGGER.info("Invalid bookmark card group name");
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(bookmarkGroupPort.findCardGroupByName(groupName), HttpStatus.OK);
     }
 
     @PostMapping(value = "/groups", headers = "Accept=application/json")

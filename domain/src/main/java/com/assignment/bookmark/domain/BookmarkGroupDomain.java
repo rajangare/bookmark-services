@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -71,5 +72,14 @@ public class BookmarkGroupDomain implements BookmarkGroupPort {
     @Override
     public void deleteCardGroup(Long cardGroupId) {
         bookmarkGroupRepository.deleteById(cardGroupId);
+    }
+
+    @Override
+    public List<BookmarkGroupDto> findCardGroupByName(String groupName) {
+        LOGGER.info("Find group by name : ", groupName);
+
+        List<BookmarkGroupEntity> entities = bookmarkGroupRepository.findGroupByGroupName(groupName);
+
+        return mapper.mapGroupDetailsDtoList(entities);
     }
 }

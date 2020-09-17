@@ -48,8 +48,14 @@ public class BookmarkCardDomain implements BookmarkCardPort {
             return Collections.EMPTY_LIST;
         }
 
-        return mapper.mapCardDetailsDtoList(StreamSupport.
+        List<BookmarkCardDto> cardDtoList = mapper.mapCardDetailsDtoList(StreamSupport.
                 stream(cardDetailsEntities.spliterator(), true).collect(Collectors.toList()));
+
+        cardDtoList.forEach(bookmarkCardDto -> {
+            bookmarkCardDto.setShortUrl(urlShorterHelper.shortenURL(bookmarkCardDto.getLongUrl()));
+        });
+
+        return cardDtoList;
     }
 
     @Override

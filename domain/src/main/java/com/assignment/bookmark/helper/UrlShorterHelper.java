@@ -85,6 +85,7 @@ public class UrlShorterHelper {
 
         if (url.charAt(url.length() - 1) == '/')
             url = url.substring(0, url.length() - 1);
+
         return url;
     }
 
@@ -117,7 +118,7 @@ public class UrlShorterHelper {
 
     public static void main(String args[]) {
         UrlShorterHelper u = new UrlShorterHelper(5, "www.rkturl.com/");
-        String urls[] = {"www.google.com/", "www.socgen.com"};
+        String urls[] = {"www.google.com/abc", "www.socgen.com/add"};
 
         for (int i = 0; i < urls.length; i++) {
             System.out.println("URL:" + urls[i] + "\tTiny: "

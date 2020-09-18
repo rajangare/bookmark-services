@@ -6,16 +6,27 @@ spring:
     config:
       uri: http://localhost:8888
 
-### PostgreSQL
-#  spring.datasource.url=jdbc:postgresql://rajangare-learning-db.postgres.database.azure.com:5432/postgres
-#  spring.datasource.username=rajangare@rajangare-learning-db
-#  spring.datasource.password=raj@123.com
-#
-#  #drop n create table again, good for testing, comment this in production
-#  spring.jpa.hibernate.ddl-auto=create
-#
-#  spring.jpa.show-sql=true
+  # Postgres db connection
+  jpa:
+    database: POSTGRESQL
+    open-in-view: true
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    platform: postgres
+    url: jdbc:postgresql://rajangare-learning-db.postgres.database.azure.com:5432/postgres
+    username: rajangare@rajangare-learning-db
+    password: raj@123.com
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
 
 server:
   port: 8090    #default port where the service will be started

@@ -1,32 +1,25 @@
 package com.assignment.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Getter
 @Setter
-public class BookmarkCardDto implements Serializable {
+@Getter
+public class BookmarkGroupDto implements Serializable {
     private Long id;
 
-    private String title;
+    private String groupName;
 
     private String description;
 
-    private String shortUrl;
+    private String groupUrl;
 
-    private String longUrl;
-
-    private String fevicon;
-
-    private LocalDate expiryDate;
-
-    private boolean approved;
-
-    BookmarkGroupDto bookmarkGroup;
+    private List<UserDto> groupAdmin;
 
     private String createdBy;
 

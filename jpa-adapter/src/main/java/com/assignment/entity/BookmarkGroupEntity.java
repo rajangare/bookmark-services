@@ -8,45 +8,32 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity(name = "BookmarkCardEntity")
-@Table(name = "T_CARD_BMK")
+@Entity(name = "BookmarkGroupEntity")
+@Table(name = "T_GROUP_BMK")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class BookmarkCardEntity implements Serializable {
+public class BookmarkGroupEntity implements Serializable {
     @Id
-    @SequenceGenerator(name = "seqBookmarkCard", sequenceName = "SEQ_CARD_BMK", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqBookmarkCard")
+    @SequenceGenerator(name = "seqGroupDetails", sequenceName = "SEQ_GROUP_BMK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGroupDetails")
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "TITLE")
-    private String title;
+    @Column(name = "GROUP_NAME")
+    private String groupName;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "SHORT_URL")
-    private String shortUrl;
-
-    @Column(name = "LONG_URL")
-    private String longUrl;
-
-    @Column(name = "FEVICON")
-    private String fevicon;
-
-    @Column(name = "EXPIRY_DATE")
-    private LocalDate expiryDate;
-
-    @Column(name = "APPROVED")
-    private boolean approved;
+    @Column(name = "GROUP_URL")
+    private String groupUrl;
 
     @Type(type = "jsonb")
-    @Column(name = "GROUP_DETAIL", columnDefinition = "jsonb")
-    private String groupDetail;
+    @Column(name = "GROUP_ADMIN", columnDefinition = "jsonb")
+    private String groupAdminDetails;
 
     @Column(name = "CREATED_BY")
     private String createdBy;

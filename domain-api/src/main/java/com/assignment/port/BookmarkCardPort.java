@@ -5,11 +5,11 @@ import com.assignment.model.BookmarkCardDto;
 import java.util.List;
 
 public interface BookmarkCardPort {
-    BookmarkCardDto findBookmarkCardById(Long bookmarkId);
+    BookmarkCardDto findBookmarkCardById(Long cardId);
 
     List<BookmarkCardDto> findAllBookmarkCards();
 
     BookmarkCardDto saveOrUpdateBookmarkCard(BookmarkCardDto bookmarkCardDto);
 
-    void deleteBookmarkCard(Long bookmarkId);
+    void deleteBookmarkCard(Long cardId);
 }
